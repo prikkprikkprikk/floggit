@@ -63,7 +63,9 @@ namespace PrikkPrikkPrikk {
             // Static class variable flag keeps track of whether debug.log has been purged or not
             if (self::$flogged==false) {
                 $logfile = (is_bool(WP_DEBUG_LOG)) ? (WP_CONTENT_DIR . '/debug.log') : WP_DEBUG_LOG;
-                unlink($logfile);
+                if(file_exists($logfile)) {
+					unlink($logfile);
+				}
                 self::$flogged = true;
             }
             loggit(...$logs);
